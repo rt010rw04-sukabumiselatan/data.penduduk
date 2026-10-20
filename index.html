@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Data Penduduk Warga RT 10 RW 04</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>tailwind.config={theme:{extend:{colors:{navy:{DEFAULT:'#12285a',700:'#1b3a7a',900:'#0b1a3d'},em:'#059669'}}}}</script>
+<style>
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f1f5f9;padding-top:env(safe-area-inset-top,0px)}
+.pg{display:none}.pg.on{display:block}
+.nav a{display:flex;gap:.6rem;align-items:center;padding:.6rem .9rem;border-radius:.5rem;color:#cbd5e1;cursor:pointer;font-size:.9rem}
+.nav a:hover{background:#1b3a7a}.nav a.on{background:#fff;color:#12285a;font-weight:600}
+.inp{width:100%;border:1px solid #cbd5e1;border-radius:.5rem;padding:.5rem .7rem;font-size:.9rem;background:#fff}
+.inp:focus{outline:2px solid #1b3a7a;border-color:#1b3a7a}
+.btn{padding:.45rem .9rem;border-radius:.5rem;font-size:.85rem;font-weight:600;background:#12285a;color:#fff}
+.btn.g{background:#059669}.btn.s{background:#e2e8f0;color:#1e293b}.btn.r{background:#dc2626}
+th{background:#f8fafc;text-align:left;font-size:.75rem;padding:.55rem;color:#475569;white-space:nowrap}
+td{padding:.5rem .55rem;border-top:1px solid #e2e8f0;font-size:.85rem}
+.card{background:#fff;border-radius:.75rem;padding:1rem;border:1px solid #e2e8f0}
+.card b{display:block;font-size:1.7rem;color:#12285a;line-height:1.1}
+.card span{font-size:.75rem;color:#64748b}
+.mo{display:none;position:fixed;inset:0;background:#0008;z-index:50;align-items:center;justify-content:center;padding:1rem;overflow:auto}
+.mo.on{display:flex}.mbox{background:#fff;border-radius:.75rem;padding:1.25rem;width:100%;max-width:560px;max-height:92vh;overflow:auto}
+.lunas{background:#059669;color:#fff;text-align:center;cursor:pointer}.belum{background:#f1f5f9;text-align:center;cursor:pointer;color:#94a3b8}
+.k{position:relative;overflow:hidden;border-radius:1rem;padding:1rem 1.1rem;color:#fff;box-shadow:0 8px 20px -8px rgba(15,23,42,.45);min-height:104px}
+.k b{display:block;font-size:2rem;line-height:1.1;font-weight:800}.k span{font-size:.78rem;opacity:.92}.k i{position:absolute;right:.6rem;top:.2rem;font-size:3rem;opacity:.22;font-style:normal}
+.k[onclick]:hover{transform:translateY(-2px)}.chip{padding:.4rem .8rem;border-radius:999px;font-size:.78rem;font-weight:600;background:#e2e8f0;color:#334155}.chip.on{color:#fff;background:#12285a}
+#login{z-index:70;background:linear-gradient(135deg,#0b1a3d,#1b3a7a)}
+th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 #e2e8f0}
+.card.overflow-x-auto{overflow:auto;max-height:72vh;-webkit-overflow-scrolling:touch}
+.card.overflow-x-auto table{min-width:max-content}
+#printRoot *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.pt{border-collapse:collapse;width:100%;border:2px solid #12285a}
+.pt th{position:static;box-shadow:none;background:#12285a;color:#fff;border:1px solid #12285a;padding:5px 6px;font-size:9pt;text-align:center}
+.pt td{border:1px solid #1b3a7a;padding:4px 6px;font-size:9pt;color:#000}
+.pt tbody tr:nth-child(even) td{background:#eef3fb}
+.pt td.lunas{background:#059669!important;color:#fff;text-align:center}.pt td.belum{text-align:center;color:#94a3b8}
+.pt tr{page-break-inside:avoid}.pt thead{display:table-header-group}
+#printRoot{display:none}
+.kop{text-align:center;font-family:"Times New Roman",serif;font-weight:bold;line-height:1.35}
+.surat{font-family:"Times New Roman",serif;color:#000;font-size:12pt;background:#fff;padding:20px 28px}
+.surat table{width:100%;border-collapse:collapse}.surat td{border:0;padding:5px 2px;font-size:12pt;vertical-align:top}
+.line{border-bottom:2px solid #000;margin:6px 0 14px}
+@media print{body{background:#fff;padding:0}body>*:not(#printRoot){display:none!important}#printRoot{display:block}@page{size:A4;margin:14mm}}
+</style></head>
+<body>
+<div id="login" class="mo on"><div class="mbox" style="max-width:380px"><div class="text-center mb-4"><div id="logoLogin" class="flex justify-center mb-1"></div><h2 class="font-bold text-navy text-lg">RT 10 RW 04 Sukabumi Selatan</h2><p class="text-xs text-slate-500">Masuk untuk mengelola data warga</p></div>
+<div class="space-y-3"><input id="lu" class="inp" placeholder="Username" autocapitalize="none" onkeydown="if(event.key==='Enter')$('lp').focus()"><input id="lp" type="password" class="inp" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"><div id="le" class="text-xs text-red-600"></div><button class="btn w-full" onclick="doLogin()">Masuk</button></div></div></div>
+<div class="flex min-h-screen">
+<aside id="side" class="bg-navy w-64 shrink-0 p-4 hidden md:block fixed md:sticky top-0 h-screen z-40 overflow-y-auto">
+ <div class="flex items-center gap-3 mb-6">
+  <span id="logoSide"></span>
+  <div class="text-white leading-tight"><div class="font-bold text-sm">RT 10 RW 04</div><div class="text-xs text-amber-300">Sukabumi Selatan</div></div>
+ </div>
+ <nav class="nav space-y-1" id="nav"></nav>
+</aside>
+<div class="flex-1 min-w-0">
+ <header class="bg-white border-b px-4 py-3 flex items-center gap-3 sticky top-0 z-30">
+  <button class="md:hidden btn s" onclick="document.getElementById('side').classList.toggle('hidden')">☰</button>
+  <h1 id="ttl" class="font-bold text-navy text-lg">Dashboard</h1>
+  <span class="ml-auto text-xs text-slate-500 hidden sm:inline" id="sync">Mode lokal</span><span id="me" class="text-xs font-semibold text-navy"></span><button class="btn s" onclick="logout()">Keluar</button>
+ </header>
+ <main class="p-4 max-w-7xl">
+
+<section id="p-dash" class="pg on"><div id="dHero" class="rounded-2xl p-5 mb-5 text-white bg-gradient-to-r from-navy via-navy-700 to-em shadow-lg"></div>
+ <div id="d0" class="grid md:grid-cols-2 gap-3 mb-5"></div><h2 class="font-semibold text-slate-600 mb-2 text-sm">Sebaran penghuni per blok</h2><div id="d4" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5"></div><h2 class="font-semibold text-slate-600 mb-2 text-sm">Jiwa yang tinggal di RT</h2><div id="d1" class="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-5"></div>
+ <h2 class="font-semibold text-slate-600 mb-2 text-sm">Kepala Keluarga (dihitung unik dari No KK)</h2><div id="d2" class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5"></div>
+ <h2 class="font-semibold text-slate-600 mb-2 text-sm">Demografi &amp; mutasi</h2><div id="d3" class="grid grid-cols-2 lg:grid-cols-4 gap-3"></div>
+</section>
+
+<section id="p-warga" class="pg">
+ <div class="flex flex-wrap gap-2 mb-3"><input id="q" class="inp max-w-xs" placeholder="Cari nama / NIK / No KK" oninput="rWarga()"><select id="wB" class="inp w-36" onchange="fillFJ('wB','wJ');rWarga()"><option value="">Semua blok<option value="A">Blok A<option value="B">Blok B</select><select id="wJ" class="inp w-44" onchange="rWarga()"></select>
+ <button id="bAdd" class="btn g" onclick="openForm()">+ Tambah warga</button><button class="btn s" onclick="xls('tblW','Data-Warga')">Ekspor Excel</button><button class="btn s" onclick="pdfTbl('tblW','DAFTAR WARGA AKTIF')">Cetak PDF</button></div>
+ <div class="card overflow-x-auto p-0"><table id="tblW" class="w-full"></table></div>
+</section>
+
+<section id="p-surat" class="pg">
+ <div class="grid lg:grid-cols-5 gap-4">
+ <div class="card lg:col-span-2 space-y-3">
+  <label class="text-xs">Pilih warga<select id="sW" class="inp" onchange="fillSurat()"></select></label>
+  <label class="text-xs">Nomor surat (otomatis, bisa diubah)<input id="sNo" class="inp" placeholder="001/RT.010/04/X/2026" oninput="rSurat()"></label>
+  <label class="text-xs">Pekerjaan<input id="sPk" class="inp" oninput="rSurat()"></label><label class="text-xs">Alamat <span id="sAlN" class="text-slate-400">(pilih warga dulu)</span><textarea id="sAl" rows="2" class="inp" placeholder="Alamat lengkap" oninput="rSurat()"></textarea></label><p class="text-xs text-slate-500">Tempat/tgl. lahir, agama, jenis kelamin, dan NIK otomatis diambil dari data warga. Alamat terisi otomatis untuk warga yang tinggal di RT (KTP setempat maupun KTP luar); KTP setempat yang tidak tinggal di RT mengisi alamat manual.</p>
+  <label class="text-xs">Jenis keperluan<select id="sJ" class="inp" onchange="jenis()"><option>Pembuatan/Perpanjangan KTP<option>Pembuatan Kartu Keluarga<option>Pembuatan SKCK<option>Surat Keterangan Domisili<option>Surat Keterangan Tidak Mampu<option>Pengurusan Akta<option>Lainnya</select></label>
+  <label class="text-xs">Uraian keperluan<textarea id="sK" rows="3" class="inp" oninput="rSurat()"></textarea></label>
+  <label class="text-xs">Tanggal surat<input id="sTg" type="date" class="inp" onchange="$('sNo').value=nextNo();rSurat()"></label>
+  <button id="bGen" class="btn g w-full" onclick="gen()">Generate PDF</button>
+ </div>
+ <div class="lg:col-span-3 card overflow-x-auto p-2" style="max-height:none"><div id="sPrev" class="surat" style="min-width:560px"></div></div></div>
+ <div class="card overflow-x-auto p-0 mt-4"><div class="px-3 py-2 flex flex-wrap gap-2 items-center"><span class="font-semibold text-navy text-sm">Riwayat nomor surat</span><input id="rQ" class="inp max-w-xs" placeholder="Cari NIK / nama / nomor surat" autocomplete="off" oninput="rRiw()"></div><table id="tblS" class="w-full"></table></div>
+</section>
+
+<section id="p-iuran" class="pg">
+ <div class="flex flex-wrap gap-2 mb-3 items-end"><label class="text-xs">Tahun<input id="iY" type="number" class="inp w-28" oninput="rIuran()"></label>
+ <label class="text-xs">Iuran/bulan (Rp)<input id="iN" type="number" class="inp w-36" value="20000" oninput="rIuran()"></label>
+ <button class="btn s" onclick="xls('tblI','Iuran-Kas')">Ekspor Excel</button><button class="btn s" onclick="pdfTbl('tblI','BUKU KAS IURAN WARGA')">Cetak PDF</button><span class="text-xs text-slate-500">Klik sel untuk menandai lunas.</span></div>
+ <div id="iTot" class="card mb-3"></div>
+ <div id="kasForm" class="card mb-3"><h3 class="font-bold text-navy text-sm mb-2">Catat iuran / kas (input manual)</h3><div class="grid sm:grid-cols-6 gap-2 text-xs items-end">
+  <label>Tanggal iuran<input id="kTg" type="date" class="inp"></label><label class="sm:col-span-2">Nama warga<select id="kW" class="inp"></select></label>
+  <label>Keterangan<input id="kKt" class="inp" value="Iuran bulanan"></label><label>Nominal (Rp)<input id="kNm" type="number" class="inp"></label>
+  <label>Untuk bulan<select id="kBl" class="inp"><option value="">Tidak ditandai<option value="0">Jan<option value="1">Feb<option value="2">Mar<option value="3">Apr<option value="4">Mei<option value="5">Jun<option value="6">Jul<option value="7">Agu<option value="8">Sep<option value="9">Okt<option value="10">Nov<option value="11">Des</select></label>
+  <div class="sm:col-span-6 flex gap-2"><button class="btn g" onclick="saveKas()" id="kBtn">Simpan iuran</button><button class="btn s" onclick="resetKas()">Kosongkan</button><span class="text-slate-500 self-center">Jika “Untuk bulan” dipilih, matriks di bawah otomatis ditandai lunas.</span></div></div></div>
+ <div class="flex gap-2 mb-2 items-center"><h3 class="font-bold text-navy text-sm">Buku kas pemasukan</h3><button class="btn s ml-auto" onclick="xls('tblKas','Buku-Kas-Iuran')">Ekspor Excel</button><button class="btn s" onclick="pdfTbl('tblKas','BUKU KAS PEMASUKAN IURAN TAHUN '+$('iY').value)">Cetak PDF</button></div>
+ <div class="card overflow-x-auto p-0 mb-4"><table id="tblKas" class="w-full"></table></div>
+ <h3 class="font-bold text-navy text-sm mb-2">Matriks status lunas per KK</h3>
+ <div class="card overflow-x-auto p-0"><table id="tblI" class="w-full"></table></div>
+</section>
+
+<section id="p-kegiatan" class="pg">
+ <div id="kForm" class="card mb-3 flex flex-wrap gap-2 items-end"><label class="text-xs">Nama kegiatan<input id="kN" class="inp"></label><label class="text-xs">Tanggal<input id="kT" type="date" class="inp"></label><button class="btn g" onclick="addKeg()">Tambah agenda</button></div>
+ <div class="card overflow-x-auto p-0"><table id="tblK" class="w-full"></table></div>
+</section>
+
+<section id="p-arsip" class="pg">
+ <div class="flex gap-2 mb-3"><button class="btn s" onclick="xls('tblA','Arsip-Mutasi')">Ekspor Excel</button><button class="btn s" onclick="pdfTbl('tblA','ARSIP MUTASI WARGA')">Cetak PDF</button></div>
+ <div class="card overflow-x-auto p-0"><table id="tblA" class="w-full"></table></div>
+</section>
+
+<section id="p-view" class="pg"><div id="vChips" class="flex flex-wrap gap-2 mb-3"></div>
+ <div class="flex flex-wrap gap-2 mb-3 items-center"><span id="vN" class="font-semibold text-navy"></span><select id="vY" class="inp w-36" onchange="rView()"><option value="">Semua tahun</option></select><select id="vB" class="inp w-36" onchange="fillFJ('vB','vJ');rView()"><option value="">Semua blok<option value="A">Blok A<option value="B">Blok B</select><select id="vJ" class="inp w-44" onchange="rView()"></select><select id="vG" class="inp w-40" onchange="rView()"><option value="">Semua L &amp; P<option value="Laki-laki">Laki-laki<option value="Perempuan">Perempuan</select><button class="btn s ml-auto" onclick="xls('tblV','Data-'+vc)">Ekspor Excel</button><button class="btn s" onclick="pdfTbl('tblV',VC[vc][0].toUpperCase())">Cetak PDF</button></div>
+ <div class="card overflow-x-auto p-0"><table id="tblV" class="w-full"></table></div></section>
+<section id="p-users" class="pg"><div class="card mb-4 grid sm:grid-cols-5 gap-2 items-end text-xs">
+ <label>Username<input id="uU" class="inp"></label><label>Nama<input id="uN" class="inp"></label>
+ <label>Role<select id="uR" class="inp"><option value="input">Petugas Input Data (lihat &amp; input warga)<option value="petugas">Petugas RT<option value="bendahara">Bendahara<option value="viewer">Pengurus (lihat saja)<option value="admin">Admin</select></label>
+ <label>Password<input id="uP" type="password" class="inp" placeholder="kosong = tidak diubah"></label>
+ <div class="flex gap-2 items-center"><label class="flex gap-1 items-center"><input type="checkbox" id="uA" checked>Aktif</label><button class="btn g" onclick="saveUser()">Simpan</button></div></div>
+ <div class="card overflow-x-auto p-0"><table id="tblU" class="w-full"></table></div>
+ <p class="text-xs text-slate-500 mt-2">Admin: semua fitur, termasuk hapus data warga dan kelola riwayat surat. Petugas Input Data: hanya melihat dan menginput/mengubah data warga. Petugas RT: warga, mutasi, surat (cetak &amp; ubah riwayat), kegiatan, iuran &amp; kas. Bendahara: iuran &amp; kas. Pengurus: hanya melihat.</p></section>
+<section id="p-set" class="pg space-y-4">
+ <div class="card space-y-2"><h3 class="font-bold text-navy">Koneksi Google Sheets</h3>
+  <input id="url" class="inp" placeholder="YOUR_GOOGLE_APPS_SCRIPT_URL"><div class="flex gap-2"><button class="btn" onclick="saveUrl()">Simpan URL</button><button class="btn g" onclick="pull()">Tarik dari Sheets</button><button class="btn s" onclick="push(true)">Kirim ke Sheets</button></div>
+  <p class="text-xs text-slate-500">Data utama disimpan di Google Sheets (sheet Warga, Iuran, Kegiatan) dan tersimpan otomatis setiap ada perubahan. Bila dibuka dari URL Web App Apps Script, koneksi otomatis tanpa mengisi URL.</p></div>
+ <div class="card space-y-2"><h3 class="font-bold text-navy">Logo RT</h3><div class="flex items-center gap-3"><span id="logoPrev"></span><input id="logoUrl" class="inp" placeholder="https://contoh.com/logo-rt.png"></div><div class="flex gap-2"><button class="btn" onclick="setLogo()">Terapkan logo</button><button class="btn s" onclick="$('logoUrl').value='';setLogo()">Kembali ke logo bawaan</button></div><p class="text-xs text-slate-500">Logo tampil di sidebar, halaman login, dan kop cetak PDF. Gunakan URL gambar langsung (PNG/JPG/SVG) yang bisa dibuka publik, misalnya dari Google Drive yang dibagikan atau hosting gambar. Tersimpan di sheet Config.</p></div>
+ <div class="card space-y-2"><h3 class="font-bold text-navy">Backup &amp; Restore</h3><div class="flex flex-wrap gap-2 items-center"><button class="btn" onclick="backup()">Ekspor JSON</button><input type="file" accept=".json" onchange="restore(event)" class="text-sm"><button class="btn r" onclick="if(confirm('Hapus semua data?')){D={warga:[],iuran:{},keg:[]};save();location.reload()}">Hapus semua data</button><button class="btn s" onclick="seed()">Isi data contoh</button></div></div>
+ <div class="card"><h3 class="font-bold text-navy mb-1">Kode Google Apps Script</h3>
+ 
+<p class="text-sm">Pakai file <b>Code.gs</b> (disertakan bersama aplikasi). Salin seluruh isinya ke editor Apps Script.</p></div>
+</section>
+ </main></div></div>
+
+<div id="mF" class="mo"><div class="mbox"><h3 class="font-bold text-navy mb-3" id="fT">Tambah warga</h3>
+ <div class="grid sm:grid-cols-2 gap-3 text-xs">
+  <label>Nama<input id="fNama" class="inp"></label><label>NIK <span id="cNik" class="text-slate-400">(0/16)</span><input id="fNik" class="inp" inputmode="numeric" autocomplete="off" oninput="numIn(this,'cNik')"></label>
+  <label>No KK <span id="cKK" class="text-slate-400">(0/16)</span><input id="fKK" class="inp" inputmode="numeric" autocomplete="off" oninput="numIn(this,'cKK')"></label>
+  <label>Jenis kelamin<select id="fG" class="inp"><option>Laki-laki<option>Perempuan</select></label>
+  <label>Tanggal lahir<input id="fTL" type="date" class="inp"></label><label>No HP<input id="fHP" class="inp"></label><label>Tempat lahir<input id="fTmp" class="inp" placeholder="mis. Jakarta"></label><label>Agama<select id="fAg" class="inp"><option>Islam<option>Kristen<option>Katolik<option>Hindu<option>Buddha<option>Konghucu<option>Lainnya</select></label>
+  <label>Hubungan keluarga<select id="fH" class="inp"><option>Kepala Keluarga<option>Istri<option>Anak<option>Anggota</select></label>
+  <label>Status tinggal<select id="fS" class="inp" onchange="tgl('s')"><option>Tetap<option>Kontrak<option>Kos<option>Tidak Berdomisili di RT</select></label>
+  <label class="sm:col-span-2 flex gap-2 items-center text-sm"><input type="checkbox" id="fC" checked onchange="tgl('c')">Alamat KTP sama dengan alamat domisili (RT 10)</label>
+  <div id="fAd" class="sm:col-span-2 grid sm:grid-cols-2 gap-3 hidden">
+   <label>Status KTP<select id="fSK" class="inp" onchange="tgl()"><option value="Setempat">KTP Setempat (Kel. Sukabumi Selatan / RT 10)<option value="Luar">KTP Luar (daerah lain)</select></label>
+   <label>Tinggal di RT 10 saat ini?<select id="fTR" class="inp" onchange="tgl('r')"><option value="Ya">Ya, tinggal di RT 10<option value="Tidak">Tidak, tinggal di luar RT</select></label>
+   <label class="sm:col-span-2">Alamat KTP asal<textarea id="fAK" rows="2" class="inp"></textarea></label>
+   <label id="fADw" class="sm:col-span-2"><span id="fADl">Alamat rumah/kos di RT 10</span><textarea id="fAD" rows="2" class="inp"></textarea></label>
+   <p class="sm:col-span-2 text-slate-500">KTP setempat yang tidak tinggal di RT: pilih “KTP Setempat” dan “Tidak”. KTP luar yang tinggal di RT: pilih “KTP Luar” dan “Ya”.</p></div>
+  <div id="fLoc" class="sm:col-span-2 grid sm:grid-cols-2 gap-3 border rounded-lg p-3 bg-slate-50"><div class="sm:col-span-2 font-semibold text-navy text-sm">📍 Alamat tinggal di RT 10</div>
+   <label>Blok<select id="fBl" class="inp" onchange="fillJalan()"><option value="">— pilih blok —<option value="A">Blok A<option value="B">Blok B</select></label>
+   <label>Nama jalan<select id="fJl" class="inp"><option value="">— pilih blok dulu —</select></label>
+   <label>Nomor rumah<input id="fNo" class="inp" placeholder="mis. 12 / 12A"></label><label id="fTMw" class="hidden">Tanggal masuk / lapor ke RT<input id="fTM" type="date" class="inp"></label>
+   </div>
+ </div><div class="flex justify-end gap-2 mt-4"><button class="btn s" onclick="cl('mF')">Batal</button><button class="btn g" onclick="saveW()">Simpan</button></div></div></div>
+
+<div id="mM" class="mo"><div class="mbox"><h3 class="font-bold text-navy mb-1">Mutasi warga</h3><p id="mN" class="text-sm mb-3"></p>
+ <div class="grid gap-2 text-xs"><label>Tanggal<input id="mTg" type="date" class="inp"></label><label>Keterangan<input id="mKt" class="inp" placeholder="mis. pindah ke Bekasi"></label></div>
+ <div class="flex flex-wrap justify-end gap-2 mt-4"><button class="btn s" onclick="cl('mM')">Batal</button><button class="btn" onclick="mut('Pindah')">Ubah ke Pindah</button><button class="btn r" onclick="mut('Meninggal')">Ubah ke Meninggal</button></div></div></div>
+
+<div id="mA" class="mo"><div class="mbox"><h3 class="font-bold text-navy mb-1" id="aT"></h3><div id="aL" class="grid sm:grid-cols-2 gap-1 text-sm my-3"></div><div class="text-right"><button class="btn" onclick="cl('mA')">Selesai</button></div></div></div>
+
+<div id="mD" class="mo"><div class="mbox" style="max-width:820px"><h3 class="font-bold text-navy" id="dKt"></h3><p id="dKi" class="text-sm mb-3"></p>
+ <div class="overflow-x-auto border rounded-lg"><table class="w-full"><thead><tr><th>No<th>Nama<th>NIK<th>L/P<th>Usia<th>Hubungan<th>Status KTP<th>Tinggal<th>Status</tr></thead><tbody id="dKb"></tbody></table></div>
+ <div class="text-right mt-3"><button class="btn" onclick="cl('mD')">Tutup</button></div></div></div>
+<div id="mS" class="mo"><div class="mbox"><h3 class="font-bold text-navy mb-3">Ubah riwayat surat</h3><div class="grid gap-2 text-xs"><label>Nomor<input id="esN" class="inp"></label><label>Tanggal<input id="esT" type="date" class="inp"></label><label>Nama<input id="esNm" class="inp"></label><label>NIK<input id="esK" class="inp"></label><label>Keperluan<input id="esP" class="inp"></label></div><div class="flex justify-end gap-2 mt-4"><button class="btn s" onclick="cl('mS')">Batal</button><button class="btn g" onclick="saveSurat()">Simpan</button></div></div></div>
+<div id="printRoot"></div>
+
+<script>
+const $=i=>document.getElementById(i);
+const KEY='warga_rt10',URLK='warga_rt10_url';
+const MENU=[['dash','📊','Dashboard'],['warga','👥','Data Warga'],['view','🔎','Lihat KTP & KK'],['surat','✉️','Surat Pengantar'],['iuran','💰','Iuran & Kas'],['kegiatan','📅','Kegiatan & Absensi'],['arsip','🗂️','Arsip Mutasi'],['users','🔐','Manajemen User'],['set','⚙️','Pengaturan Admin']];
+const BLN=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+const RT_ADDR='RT 010 / RW 04, Kel. Sukabumi Selatan, Kec. Kebon Jeruk, Jakarta Barat';
+const GAS_URL='YOUR_GOOGLE_APPS_SCRIPT_URL';
+let D={warga:[],iuran:{},keg:[]},cur='dash',editId=null,mutId=null,gsUrl='';
+try{D=JSON.parse(localStorage.getItem(KEY))||D;gsUrl=localStorage.getItem(URLK)||''}catch(e){}
+gsUrl=gsUrl||GAS_URL;
+function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}}
+function save(){saveLocal();autoPush()}
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const uid=()=>'W'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+const fd=s=>{if(!s)return'';const d=new Date(s);return isNaN(d)?s:d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})};
+const age=s=>{if(!s)return 0;return new Date().getFullYear()-new Date(s).getFullYear()};
+const akt=()=>D.warga.filter(w=>w.StatusWarga==='Aktif');
+const isChk=w=>w.CheckboxAlamat===true||w.CheckboxAlamat==='TRUE'||w.CheckboxAlamat==='true';
+const inRT=t=>/rt\s*0?10\b/i.test(t||'');
+const setempat=w=>w.StatusKTP?w.StatusKTP==='Setempat':(isChk(w)||inRT(w.AlamatKTP)||/sukabumi selatan/i.test(w.AlamatKTP||''));
+const tinggal=w=>w.StatusTinggal==='Tidak Berdomisili di RT'?false:w.TinggalDiRT?w.TinggalDiRT==='Ya':(isChk(w)||!!(w.AlamatDomisili||'').trim());
+function nav(p){cur=p;document.querySelectorAll('.pg').forEach(e=>e.classList.toggle('on',e.id==='p-'+p));
+ $('nav').innerHTML=MENU.filter(m=>okMenu(m[0])).map(m=>`<a class="${m[0]===p?'on':''}" onclick="nav('${m[0]}')"><span>${m[1]}</span>${m[2]}</a>`).join('');
+ $('ttl').textContent=MENU.find(m=>m[0]===p)[2];$('bAdd').style.display=can('warga')?'':'none';$('bGen').style.display=can('surat')?'':'none';$('kForm').style.display=can('kegiatan')?'':'none';$('kasForm').style.display=can('iuran')?'':'none';if(innerWidth<768)$('side').classList.add('hidden');
+ ({view:rView,users:rUsers,dash:rDash,warga:rWarga,surat:initSurat,iuran:rIuran,kegiatan:rKeg,arsip:rArsip,set:()=>{$('url').value=gsUrl;$('logoUrl').value=(D.cfg||{}).logo||'';applyLogo()}})[p]()}
+const K=(n,l,c,i,go)=>`<div class="k bg-gradient-to-br ${c}" ${go?`onclick="goView('${go}')" style="cursor:pointer;transition:.15s"`:''}><i>${i}</i><b>${n}</b><span>${l}</span></div>`;
+const KW=(n,l,ps,c,i)=>`<div class="k bg-gradient-to-br ${c}" style="min-height:150px"><i>${i}</i><b style="font-size:2.6rem">${n}</b><span>${l}</span><div class="grid grid-cols-3 gap-2 mt-3">${ps.map(p=>`<div class="rounded-lg bg-white/20 p-2" style="cursor:pointer" onclick="goView('${p[2]}')"><div class="font-bold text-lg">${p[0]}</div><div style="font-size:.68rem;line-height:1.2">${p[1]}</div></div>`).join('')}</div></div>`;
+function heads(){const kk={};akt().filter(w=>w.HubKeluarga==='Kepala Keluarga').forEach(w=>kk[w.NoKK]=w);return Object.values(kk)}
+const VC={tg:['Semua penghuni RT','from-blue-600 to-indigo-700'],ws:['KTP setempat tinggal di RT','from-emerald-500 to-teal-600'],lt:['KTP luar tinggal di RT','from-orange-400 to-amber-600'],bi:['Pendatang (KTP luar) masuk bulan ini','from-yellow-500 to-orange-600'],wn:['KTP setempat tidak tinggal di RT','from-rose-500 to-pink-600'],kws:['KK setempat tinggal di RT','from-cyan-500 to-blue-600'],klt:['KK luar tinggal di RT','from-violet-500 to-purple-700'],kwn:['KK setempat tidak tinggal di RT','from-amber-500 to-red-500'],pin:['Warga pindah','from-amber-500 to-orange-600'],mng:['Warga meninggal','from-slate-600 to-gray-800'],bkr:['Penduduk berkurang (pindah + meninggal)','from-red-500 to-rose-700'],gl:['Penduduk laki-laki','from-sky-500 to-blue-600'],gp:['Penduduk perempuan','from-pink-400 to-fuchsia-600'],a1:['Balita (0-5 tahun)','from-lime-500 to-green-600'],a2:['Anak-anak (6-11 tahun)','from-yellow-400 to-orange-500'],a3:['Remaja (12-25 tahun)','from-teal-400 to-cyan-600'],a4:['Dewasa (26-59 tahun)','from-indigo-500 to-blue-700'],a5:['Lansia (60+ tahun)','from-slate-500 to-slate-700']};
+const MUT=['pin','mng','bkr'];
+const vf={ws:w=>setempat(w)&&tinggal(w),lt:w=>!setempat(w)&&tinggal(w),wn:w=>setempat(w)&&!tinggal(w)};vf.kws=vf.ws;vf.klt=vf.lt;vf.kwn=vf.wn;vf.tg=tinggal;vf.gl=w=>w.Gender==='Laki-laki';vf.gp=w=>w.Gender==='Perempuan';const ra=(x,y)=>w=>{const a=age(w.TanggalLahir);return a>=x&&a<=y};vf.a1=ra(0,5);vf.a2=ra(6,11);vf.a3=ra(12,25);vf.a4=ra(26,59);vf.a5=ra(60,200);vf.bi=w=>!setempat(w)&&tinggal(w)&&String(w.TglMasuk||'').slice(0,7)===curYM();
+let vc='ws';function goView(c){if(c[0]==='@'){vc='tg';nav('view');$('vB').value=c.slice(1);fillFJ('vB','vJ');rView();return}vc=c;nav('view')}
+function rDash(){const a=akt(),t=a.filter(tinggal),S=t.filter(setempat).length,L=t.length-S,nonDom=a.filter(vf.wn).length,Hd=heads();
+ $('dHero').innerHTML=`<div class="text-xs opacity-80">${new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div><div class="text-xl font-bold">Selamat datang, ${esc(ME?ME.nama:'')}</div><div class="text-sm opacity-90">RT 010 / RW 04 · Kelurahan Sukabumi Selatan · ${a.length} warga aktif dari ${Hd.length} KK</div>`;
+ const kA=Hd.filter(vf.kws).length,kB=Hd.filter(vf.klt).length,kC=Hd.filter(vf.kwn).length;
+ $('d0').innerHTML=KW(S+L+nonDom,'Total seluruh penduduk (warga aktif)',[[S,'KTP setempat tinggal di RT','ws'],[L,'KTP luar tinggal di RT','lt'],[nonDom,'KTP setempat tidak tinggal di RT','wn']],'from-navy to-blue-600','👥')+KW(kA+kB+kC,'Total seluruh KK',[[kA,'KK setempat tinggal di RT','kws'],[kB,'KK luar tinggal di RT','klt'],[kC,'KK setempat tidak tinggal','kwn']],'from-emerald-600 to-teal-700','🏡');
+ const bj=b=>t.filter(w=>b==='-'?!w.Blok:w.Blok===b).length,bk=b=>Hd.filter(w=>tinggal(w)&&(b==='-'?!w.Blok:w.Blok===b)).length;
+ $('d4').innerHTML=K(bj('A'),'Blok A · '+bk('A')+' KK','from-sky-500 to-indigo-600','🅰️','@A')+K(bj('B'),'Blok B · '+bk('B')+' KK','from-fuchsia-500 to-purple-700','🅱️','@B');
+ $('d1').innerHTML=K(t.length,'Total penghuni RT','from-blue-600 to-indigo-700','🏠')+K(S,'Penduduk KTP setempat','from-emerald-500 to-teal-600','🪪','ws')+K(L,'Penduduk KTP luar','from-orange-400 to-amber-600','🧳','lt')+K(nonDom,'KTP setempat, tidak tinggal di RT','from-rose-500 to-pink-600','🚪','wn')+K(a.filter(vf.bi).length,'Pendatang masuk bulan ini ('+new Date().toLocaleDateString('id-ID',{month:'long',year:'numeric'})+')','from-yellow-500 to-orange-600','🆕','bi');
+ $('d2').innerHTML=K(Hd.filter(w=>vf.kws(w)).length,'KK KTP setempat tinggal di RT','from-cyan-500 to-blue-600','👨‍👩‍👧','kws')+K(Hd.filter(w=>vf.klt(w)).length,'KK KTP luar tinggal di RT','from-violet-500 to-purple-700','📇','klt')+K(Hd.filter(w=>vf.kwn(w)).length,'KK setempat tidak tinggal di RT','from-amber-500 to-red-500','🗺️','kwn');
+ const g=x=>a.filter(w=>w.Gender===x).length,ag=a.map(w=>age(w.TanggalLahir)),c=(x,y)=>ag.filter(v=>v>=x&&v<=y).length,ar=D.warga.filter(w=>w.StatusWarga!=='Aktif'),m=x=>ar.filter(w=>w.StatusWarga===x).length;
+ $('d3').innerHTML=K(g('Laki-laki'),'Laki-laki','from-sky-500 to-blue-600','👨','gl')+K(g('Perempuan'),'Perempuan','from-pink-400 to-fuchsia-600','👩','gp')+K(c(0,5),'Balita (0-5)','from-lime-500 to-green-600','🍼','a1')+K(c(6,11),'Anak-anak (6-11)','from-yellow-400 to-orange-500','🎒','a2')+K(c(12,25),'Remaja (12-25)','from-teal-400 to-cyan-600','🎓','a3')+K(c(26,59),'Dewasa (26-59)','from-indigo-500 to-blue-700','💼','a4')+K(ag.filter(v=>v>=60).length,'Lansia (60+)','from-slate-500 to-slate-700','🧓','a5')+K(m('Pindah'),'Warga pindah','from-amber-500 to-orange-600','📦','pin')+K(m('Meninggal'),'Warga meninggal','from-slate-600 to-gray-800','🕊️','mng')+K(m('Pindah')+m('Meninggal'),'Penduduk berkurang','from-red-500 to-rose-700','📉','bkr')}
+function rView(){$('vChips').innerHTML=Object.keys(VC).map(k=>`<button class="chip ${k===vc?'on':''}" onclick="vc='${k}';rView()">${VC[k][0]}</button>`).join('');
+ $('vY').style.display=MUT.includes(vc)?'':'none';if(MUT.includes(vc))return rMut();const kk=vc[0]==='k',f=vf[vc];let h;
+ if(kk){const L=heads().filter(f).filter(w=>blokOk(w,$('vB').value,$('vJ').value)).filter(genOk).sort(byNama);h=L;$('tblV').innerHTML='<thead><tr><th>No<th>Kepala Keluarga<th>No KK<th>Jml Anggota<th>Alamat KTP<th>Blok<th>Alamat Domisili<th class="no-x">Aksi</tr></thead><tbody>'+(L.length?L.map((w,i)=>`<tr><td>${i+1}<td class="font-medium">${esc(w.Nama)}<td>${esc(w.NoKK)}<td>${akt().filter(x=>x.NoKK===w.NoKK).length}<td>${esc(w.AlamatKTP)}<td>${esc(w.Blok||'-')}<td>${esc(w.AlamatDomisili)}<td class="no-x"><button class="btn g" onclick="showKK('${w.NoKK}')">Detail anggota</button></tr>`).join(''):'<tr><td colspan="6" class="text-center text-slate-400 py-6">Tidak ada data.</tr>')+'</tbody>'}
+ else{const L=akt().filter(f).filter(w=>blokOk(w,$('vB').value,$('vJ').value)).filter(genOk).sort(byNama);h=L;$('tblV').innerHTML='<thead><tr><th>No<th>Nama<th>NIK<th>No KK<th>L/P<th>Usia<th>Hubungan<th>Alamat KTP<th>Blok<th>Alamat Domisili<th>Tgl Masuk<th>Lama Tinggal<th class="no-x">Aksi</tr></thead><tbody>'+(L.length?L.map((w,i)=>`<tr><td>${i+1}<td class="font-medium">${esc(w.Nama)}<td>${esc(w.NIK)}<td>${esc(w.NoKK)}<td>${w.Gender==='Laki-laki'?'L':'P'}<td>${age(w.TanggalLahir)} th<td>${esc(w.HubKeluarga)}<td>${esc(w.AlamatKTP)}<td>${esc(w.Blok||'-')}<td>${esc(w.AlamatDomisili)}<td>${w.TglMasuk?fd(w.TglMasuk):'-'}<td>${lama(w.TglMasuk)}<td class="no-x"><button class="btn g" onclick="showKK('${w.NoKK}')">Detail KK</button></tr>`).join(''):'<tr><td colspan="7" class="text-center text-slate-400 py-6">Tidak ada data.</tr>')+'</tbody>'}
+ $('vN').textContent=VC[vc][0]+': '+h.length+(kk?' KK':' jiwa')}
+function rWarga(){const q=($('q').value||'').toLowerCase();
+ const r=akt().filter(w=>(w.Nama+w.NIK+w.NoKK).toLowerCase().includes(q)&&blokOk(w,$('wB').value,$('wJ').value));
+ $('tblW').innerHTML=`<thead><tr><th>No<th>Nama<th>NIK<th>No KK<th>L/P<th>Tgl Lahir<th>Hubungan<th>Tinggal<th>Blok<th>Alamat Domisili<th>Tgl Masuk<th>Lama Tinggal<th class="no-x">Aksi</tr></thead><tbody>`+(r.length?r.map((w,i)=>`<tr><td>${i+1}<td class="font-medium">${esc(w.Nama)}<td>${esc(w.NIK)}<td>${esc(w.NoKK)}<td>${w.Gender==='Laki-laki'?'L':'P'}<td>${fd(w.TanggalLahir)}<td>${esc(w.HubKeluarga)}<td>${esc(w.StatusTinggal)}<td>${esc(w.Blok||'-')}<td>${esc(isChk(w)&&!w.Jalan?RT_ADDR:w.AlamatDomisili)}<td>${w.TglMasuk?fd(w.TglMasuk):'-'}<td>${lama(w.TglMasuk)}<td class="no-x whitespace-nowrap"><button class="btn g" onclick="showKK('${w.NoKK}')">Detail KK</button> ${can('warga')?`<button class="btn s" onclick="openForm('${w.ID}')">Ubah</button>`:''} ${can('mutasi')?`<button class="btn r" onclick="openMut('${w.ID}')">Mutasi</button>`:''} ${can('hapus')?`<button class="btn r" onclick="delW('${w.ID}')">Hapus</button>`:''}</tr>`).join(''):'<tr><td colspan="10" class="text-center text-slate-400 py-6">Belum ada warga. Klik “Tambah warga”.</tr>')+'</tbody>'}
+function tgl(src){const T='Tidak Berdomisili di RT';
+ if(src==='s'&&$('fS').value===T){$('fC').checked=false;$('fTR').value='Tidak'}
+ if(src==='r'){if($('fTR').value==='Tidak')$('fS').value=T;else if($('fS').value===T)$('fS').value='Tetap'}
+ if(src==='c'&&$('fC').checked&&$('fS').value===T)$('fS').value='Tetap';
+ $('fAd').classList.toggle('hidden',$('fC').checked);
+ const inr=($('fC').checked||$('fTR').value==='Ya')&&$('fS').value!==T;
+ $('fLoc').classList.toggle('hidden',!inr);$('fTMw').classList.toggle('hidden',!(inr&&!$('fC').checked&&$('fSK').value==='Luar'));$('fADw').classList.toggle('hidden',inr);
+ $('fADl').textContent='Alamat domisili saat ini (di luar RT)'}
+const JLN={A:['Jl. Panjang','Gang H. Raidi','Jl. Pahlawan'],B:['Jl. Panjang','Gang H. Raidi','Jl. KH. Tohir']},ALLJ=[...new Set([...JLN.A,...JLN.B])];
+function fillJalan(sel){const b=$('fBl').value;$('fJl').innerHTML=`<option value="">${b?'— pilih jalan —':'— pilih blok dulu —'}</option>`+(JLN[b]||[]).map(j=>`<option>${j}</option>`).join('');if(sel)$('fJl').value=sel}
+function fillFJ(bi,ji){const b=$(bi).value,old=$(ji).value;$(ji).innerHTML='<option value="">Semua jalan</option>'+(JLN[b]||ALLJ).map(j=>`<option>${j}</option>`).join('');$(ji).value=(JLN[b]||ALLJ).includes(old)?old:''}
+const blokOk=(w,B,J)=>(!B||(B==='-'?!w.Blok:w.Blok===B))&&(!J||w.Jalan===J);
+function openForm(id){editId=id||null;const w=D.warga.find(x=>x.ID===id)||{};$('fT').textContent=id?'Ubah data warga':'Tambah warga';
+ $('fNama').value=w.Nama||'';$('fNik').value=w.NIK||'';$('fKK').value=w.NoKK||'';numIn($('fNik'),'cNik');numIn($('fKK'),'cKK');$('fG').value=w.Gender||'Laki-laki';$('fTL').value=w.TanggalLahir||'';$('fHP').value=w.NoHP||'';$('fTmp').value=w.TempatLahir||'';$('fAg').value=w.Agama||'Islam';$('fTM').value=w.TglMasuk||'';
+ $('fH').value=w.HubKeluarga||'Kepala Keluarga';$('fS').value=w.StatusTinggal||'Tetap';$('fC').checked=id?isChk(w):true;$('fAK').value=w.AlamatKTP||'';$('fAD').value=w.AlamatDomisili||'';$('fSK').value=id&&!setempat(w)?'Luar':'Setempat';$('fTR').value=id&&!tinggal(w)?'Tidak':'Ya';$('fBl').value=w.Blok||'';fillJalan(w.Jalan);$('fNo').value=w.NoRumah||'';tgl();$('mF').classList.add('on')}
+const cl=i=>$(i).classList.remove('on');
+function lama(d){if(!d)return'-';const a=new Date(d),n=new Date();if(isNaN(a)||a>n)return'-';let m=(n.getFullYear()-a.getFullYear())*12+n.getMonth()-a.getMonth();if(n.getDate()<a.getDate())m--;if(m<1)return Math.max(0,Math.floor((n-a)/864e5))+' hari';const y=Math.floor(m/12),b=m%12;return((y?y+' th ':'')+(b?b+' bln':'')).trim()}
+const curYM=()=>{const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')};
+const genOk=w=>!$('vG').value||w.Gender===$('vG').value;
+const byNama=(a,b)=>String(a.Nama).localeCompare(String(b.Nama),'id',{sensitivity:'base'});
+function numIn(el,id){el.value=el.value.replace(/\D/g,'').slice(0,16);$(id).textContent='('+el.value.length+'/16)'}
+function saveW(){const n=$('fNama').value.trim(),nik=$('fNik').value.trim(),kk=$('fKK').value.trim();
+ const nikd=nik.replace(/\D/g,''),kkd=kk.replace(/\D/g,'');
+ if(!n)return alert('Nama wajib diisi.');
+ if(nikd.length!==16)return alert('NIK harus 16 digit angka. Saat ini terisi '+nikd.length+' digit.');
+ if(kkd.length!==16)return alert('No KK harus 16 digit angka. Saat ini terisi '+kkd.length+' digit.');
+ if(D.warga.some(x=>String(x.NIK)===nikd&&x.ID!==editId))return alert('NIK ini sudah terdaftar atas nama warga lain.');
+ let st=$('fS').value;const c=$('fC').checked&&st!=='Tidak Berdomisili di RT';if(!c&&$('fTR').value==='Tidak')st='Tidak Berdomisili di RT';if(!c){if($('fSK').value==='Luar'&&$('fTR').value==='Tidak')return alert('KTP luar yang tidak tinggal di RT 10 bukan warga RT ini.');if(!$('fAK').value.trim()||(st==='Tidak Berdomisili di RT'&&!$('fAD').value.trim()))return alert('Isi alamat KTP dan alamat domisili.')}
+ const inr=(c||$('fTR').value==='Ya')&&st!=='Tidak Berdomisili di RT',bl=$('fBl').value,jl=$('fJl').value,nr=$('fNo').value.trim();
+ if(inr){if(!bl||!jl||!nr)return alert('Lengkapi Blok, Nama jalan, dan Nomor rumah.');}
+ const luarIn=!c&&$('fSK').value==='Luar'&&inr;if(luarIn&&!$('fTM').value)return alert('Isi tanggal masuk/lapor untuk warga KTP luar (pendatang).');
+ const alRT=inr?`${jl} No. ${nr}, Blok ${bl}, RT 010/04 Kel. Sukabumi Selatan`:'';const o={Nama:n,NIK:nikd,NoKK:kkd,Gender:$('fG').value,TanggalLahir:$('fTL').value,NoHP:$('fHP').value,HubKeluarga:$('fH').value,StatusTinggal:st,CheckboxAlamat:c,StatusKTP:c?'Setempat':$('fSK').value,TinggalDiRT:c?'Ya':(st==='Tidak Berdomisili di RT'?'Tidak':$('fTR').value),AlamatKTP:c?alRT:$('fAK').value,AlamatDomisili:inr?alRT:$('fAD').value,Blok:inr?bl:'',Jalan:inr?jl:'',NoRumah:inr?nr:'',TempatLahir:$('fTmp').value.trim(),Agama:$('fAg').value,TglMasuk:luarIn?$('fTM').value:''};
+ if(editId)Object.assign(D.warga.find(x=>x.ID===editId),o);else D.warga.push({ID:uid(),StatusWarga:'Aktif',TanggalMutasi:'',Keterangan:'',...o});
+ save();cl('mF');rWarga();autoPush()}
+function openMut(id){mutId=id;const w=D.warga.find(x=>x.ID===id);$('mN').textContent='Warga: '+w.Nama;$('mTg').value=new Date().toISOString().slice(0,10);$('mKt').value='';$('mM').classList.add('on')}
+function mut(s){const w=D.warga.find(x=>x.ID===mutId);w.StatusWarga=s;w.TanggalMutasi=$('mTg').value;w.Keterangan=$('mKt').value;save();cl('mM');rWarga();autoPush()}
+function rMut(){const all=D.warga.filter(w=>w.StatusWarga!=='Aktif'),cv=$('vY').value;
+ const ys=[...new Set(all.map(w=>String(w.TanggalMutasi||'').slice(0,4)).filter(Boolean))].sort().reverse();
+ $('vY').innerHTML='<option value="">Semua tahun</option>'+ys.map(y=>`<option ${y===cv?'selected':''}>${y}</option>`).join('');
+ const L=all.filter(w=>(vc==='bkr'||w.StatusWarga===(vc==='pin'?'Pindah':'Meninggal'))&&(!cv||String(w.TanggalMutasi).slice(0,4)===cv)&&blokOk(w,$('vB').value,$('vJ').value)&&genOk(w));
+ $('tblV').innerHTML='<thead><tr><th>No<th>Nama<th>NIK<th>No KK<th>Hubungan<th>Usia<th>Status<th>Tanggal<th>Keterangan<th class="no-x">Aksi</tr></thead><tbody>'+(L.length?L.map((w,i)=>`<tr><td>${i+1}<td class="font-medium">${esc(w.Nama)}<td>${esc(w.NIK)}<td>${esc(w.NoKK)}<td>${esc(w.HubKeluarga)}<td>${age(w.TanggalLahir)} th<td><b class="${w.StatusWarga==='Pindah'?'text-amber-600':'text-red-600'}">${w.StatusWarga}</b><td>${fd(w.TanggalMutasi)}<td>${esc(w.Keterangan)}<td class="no-x"><button class="btn g" onclick="showKK('${w.NoKK}')">Detail KK</button></tr>`).join(''):'<tr><td colspan="10" class="text-center text-slate-400 py-6">Belum ada data.</tr>')+'</tbody>';
+ $('vN').textContent=VC[vc][0]+': '+L.length+' jiwa'}
+function showKK(kk){const m=D.warga.filter(w=>w.NoKK===kk).sort((a,b)=>(a.HubKeluarga==='Kepala Keluarga'?0:1)-(b.HubKeluarga==='Kepala Keluarga'?0:1));if(!m.length)return;
+ const h=m.find(w=>w.HubKeluarga==='Kepala Keluarga');const n=m.filter(w=>w.StatusWarga==='Aktif').length;
+ $('dKt').textContent='Anggota Kartu Keluarga '+kk;
+ $('dKi').innerHTML=h?`Kepala keluarga: <b>${esc(h.Nama)}</b> · ${n} anggota aktif<br>Alamat domisili: ${esc(isChk(h)?RT_ADDR:h.AlamatDomisili)}`:`<span class="text-red-600">KK ini belum punya Kepala Keluarga, sehingga tidak dihitung di statistik KK.</span>`;
+ $('dKb').innerHTML=m.map((w,i)=>`<tr><td>${i+1}<td class="font-medium">${esc(w.Nama)}<td>${esc(w.NIK)}<td>${w.Gender==='Laki-laki'?'L':'P'}<td>${age(w.TanggalLahir)} th<td>${esc(w.HubKeluarga)}<td>${setempat(w)?'Setempat':'Luar'}<td>${tinggal(w)?'Di RT':'Luar RT'}<td>${w.StatusWarga==='Aktif'?'<b class="text-em">Aktif</b>':'<span class="text-red-600">'+w.StatusWarga+'</span>'}</tr>`).join('');$('mD').classList.add('on')}
+function rArsip(){const r=D.warga.filter(w=>w.StatusWarga!=='Aktif');
+ $('tblA').innerHTML='<thead><tr><th>No<th>Nama<th>NIK<th>No KK<th>Status<th>Tanggal<th>Keterangan<th class="no-x">Aksi</tr></thead><tbody>'+(r.length?r.map((w,i)=>`<tr><td>${i+1}<td>${esc(w.Nama)}<td>${esc(w.NIK)}<td>${esc(w.NoKK)}<td><b class="${w.StatusWarga==='Pindah'?'text-amber-600':'text-red-600'}">${w.StatusWarga}</b><td>${fd(w.TanggalMutasi)}<td>${esc(w.Keterangan)}<td class="no-x">${can('mutasi')?`<button class="btn s" onclick="restoreW('${w.ID}')">Aktifkan lagi</button>`:''} ${can('hapus')?`<button class="btn r" onclick="delW('${w.ID}')">Hapus</button>`:''}</tr>`).join(''):'<tr><td colspan="8" class="text-center text-slate-400 py-6">Arsip masih kosong.</tr>')+'</tbody>'}
+function delW(id){const w=D.warga.find(x=>x.ID===id);if(!w||!can('hapus'))return;if(!confirm('Hapus permanen data '+w.Nama+'? Tindakan ini tidak bisa dibatalkan.'))return;D.warga=D.warga.filter(x=>x.ID!==id);save();cur==='arsip'?rArsip():rWarga()}
+function restoreW(id){const w=D.warga.find(x=>x.ID===id);w.StatusWarga='Aktif';w.TanggalMutasi='';save();rArsip();autoPush()}
+/* Surat */
+const KEP={'Pembuatan/Perpanjangan KTP':'Pembuatan/Perpanjangan KTP','Pembuatan Kartu Keluarga':'Pembuatan Kartu Keluarga','Pembuatan SKCK':'Pembuatan SKCK (Surat Keterangan Catatan Kepolisian)','Surat Keterangan Domisili':'Surat Keterangan Domisili','Surat Keterangan Tidak Mampu':'Surat Keterangan Tidak Mampu','Pengurusan Akta':'Pengurusan Akta','Lainnya':''};
+function initSurat(){sCari();if(!$('sTg').value)$('sTg').value=new Date().toISOString().slice(0,10);$('sNo').value=nextNo();jenis();rRiw()}
+function jenis(){$('sK').value=KEP[$('sJ').value];rSurat()}
+function sCari(){const q='',qd='';
+ const L=akt().filter(w=>!q||String(w.Nama).toLowerCase().includes(q)||(qd&&String(w.NIK).includes(qd))).sort(byNama);
+ $('sW').innerHTML='<option value="">— pilih warga —</option>'+L.map(w=>`<option value="${w.ID}">${esc(w.Nama)} (${esc(w.NIK)})</option>`).join('');
+ if(q&&L.length===1)$('sW').value=L[0].ID;fillSurat()}
+function fillSurat(){const w=D.warga.find(x=>x.ID===$('sW').value),a=$('sAl');
+ if(w&&tinggal(w)){a.value=(isChk(w)&&!w.Jalan)?RT_ADDR:(w.AlamatDomisili||RT_ADDR);$('sAlN').textContent='(otomatis: alamat domisili di RT)'}
+ else{a.value='';$('sAlN').textContent=w?'(tidak tinggal di RT — isi manual)':'(pilih warga dulu)'}rSurat()}
+function suratHTML(o){const F=o||{pk:$('sPk').value,al:$('sAl').value,kep:$('sK').value,no:$('sNo').value,tg:$('sTg').value};const w=o?o.w:(D.warga.find(x=>x.ID===$('sW').value)||{});const dot='.'.repeat(70);const v=(x)=>x?esc(x):dot;
+ const tl=w.ID?((w.TempatLahir?esc(w.TempatLahir)+', ':'')+fd(w.TanggalLahir)):dot;
+ const al=(F.al||'').trim()?esc((F.al||'').trim()):dot,no=esc(F.no);
+ return `<div class="kop" style="font-size:12pt">RUKUN TETANGGA 010 / 04<br>KELURAHAN SUKABUMI SELATAN KECAMATAN KEBON JERUK<br>KOTA ADMINISTRASI JAKARTA BARAT<div style="font-weight:normal;font-size:11pt">Sekretariat : Gg. H. Raidi Kp. Baru RT 010 / 04 No. Hp : 0882 1971 8063<br>JAKARTA</div></div>
+ <div style="text-align:right;font-size:11pt">Kode Pos 11560</div><div class="line"></div>
+ <div style="text-align:center;font-weight:bold;margin-bottom:10px"><u>SURAT PENGANTAR</u><br>NOMOR : ${no}</div>
+ <p style="text-align:center;margin:12px 0">Yang bertanda tangan di bawah ini, menerangkan bahwa:</p>
+ <table><colgroup><col style="width:30%"><col></colgroup>
+ <tr><td>Nama<td>: ${v(w.Nama)}<tr><td>Tempat/Tgl. Lahir<td>: ${tl}<tr><td>Jenis kelamin<td>: ${w.Gender||'Laki-laki/Perempuan'}
+ <tr><td>Agama<td>: ${v(w.Agama)}<tr><td>Pekerjaan<td>: ${v(F.pk)}<tr><td>Nomor KTP<td>: ${v(w.NIK)}
+ <tr><td>Alamat<td>: ${al}<tr><td>Keperluan<td>: ${esc(F.kep)||dot}</table>
+ <p style="margin:16px 0;line-height:1.8">Demikian surat pengantar ini dibuat untuk dapat dipergunakan sebagaimana mestinya dan yang berkepentingan untuk menjadi maklum.</p>
+ <div style="margin:18px 0">Nomor : ${no}<br>Tanggal : ${fd(F.tg)}</div>
+ <table><tr><td style="text-align:center;width:50%"><b>KETUA RW 04</b><br><b style="font-size:10.5pt">KELURAHAN SUKABUMI SELATAN</b><td style="text-align:center"><b>KETUA RT. 010 / 04</b><br><b style="font-size:10.5pt">KELURAHAN SUKABUMI SELATAN</b>
+ <tr><td style="height:80px"><td><tr><td style="text-align:center"><b><u>Andi Rosandi</u></b><td style="text-align:center"><b><u>H. HAPIZ</u></b></table>
+ <p style="font-style:italic;font-size:10.5pt;margin-top:12px">(*Surat Pengantar ini berlaku 7 hari sejak di tanda tangani).</p>`}
+function rSurat(){$('sPrev').innerHTML=suratHTML()}
+const ROM=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
+function nextNo(){const d=new Date($('sTg').value||Date.now()),y=d.getFullYear();D.surat=D.surat||[];
+ const mx=Math.max(0,...D.surat.filter(x=>String(x.tgl).slice(0,4)==String(y)).map(x=>parseInt(x.no)||0));
+ return String(mx+1).padStart(3,'0')+'/RT.010/04/'+ROM[d.getMonth()]+'/'+y}
+function rMatch(x){const q=($('rQ').value||'').trim().toLowerCase(),qd=q.replace(/\D/g,'');return !q||String(x.nama).toLowerCase().includes(q)||String(x.no).toLowerCase().includes(q)||(qd&&String(x.nik).includes(qd))}
+function rRiw(){D.surat=D.surat||[];const adm=can('hapus'),cs=can('surat'),ce=can('editsurat'),ac=adm||cs||ce;
+ $('tblS').innerHTML='<thead><tr><th>Nomor<th>Tanggal<th>Nama<th>NIK<th>Keperluan'+(ac?'<th class="no-x">Aksi':'')+'</tr></thead><tbody>'+(D.surat.map((x,i)=>[x,i]).filter(([x])=>rMatch(x)).reverse().map(([x,i])=>`<tr><td>${esc(x.no)}<td>${fd(x.tgl)}<td>${esc(x.nama)}<td>${esc(x.nik)}<td>${esc(x.kep)}`+(ac?`<td class="no-x whitespace-nowrap">${cs?`<button class="btn g" onclick="reprint(${i})">Cetak ulang</button>`:''} ${ce?`<button class="btn s" onclick="editSurat(${i})">Ubah</button>`:''} ${adm?`<button class="btn r" onclick="delSurat(${i})">Hapus</button>`:''}`:'')+'</tr>').join('')||'<tr><td colspan="6" class="text-center text-slate-400 py-4">Belum ada surat dicetak.</tr>')+'</tbody>'}
+function reprint(i){if(!can('surat'))return;const h=D.surat[i],w0=D.warga.find(x=>String(x.NIK)===String(h.nik))||{};
+ const w={ID:'x',Nama:h.nama,NIK:h.nik,Gender:h.jk||w0.Gender||'',TempatLahir:h.tpl||w0.TempatLahir||'',TanggalLahir:h.tlh||w0.TanggalLahir||'',Agama:h.ag||w0.Agama||''};
+ $('printRoot').innerHTML='<div class="surat">'+suratHTML({w,pk:h.pk||'',al:h.al||'',kep:h.kep,no:h.no,tg:h.tgl})+'</div>';doPrint()}
+let esI=null;
+function editSurat(i){const x=D.surat[i];esI=i;$('esN').value=x.no;$('esT').value=x.tgl;$('esNm').value=x.nama;$('esK').value=x.nik;$('esP').value=x.kep;$('mS').classList.add('on')}
+function saveSurat(){const no=$('esN').value.trim();if(!no)return alert('Nomor surat wajib diisi.');if(D.surat.some((x,i)=>i!==esI&&x.no===no))return alert('Nomor surat sudah ada.');
+ Object.assign(D.surat[esI],{no,tgl:$('esT').value,nama:$('esNm').value,nik:$('esK').value,kep:$('esP').value});save();cl('mS');rRiw();$('sNo').value=nextNo();rSurat()}
+function delSurat(i){if(!confirm('Hapus riwayat surat '+D.surat[i].no+'?'))return;D.surat.splice(i,1);save();rRiw();$('sNo').value=nextNo();rSurat()}
+function gen(){const w=D.warga.find(x=>x.ID===$('sW').value);if(!w)return alert('Pilih warga terlebih dahulu.');if((!w.TempatLahir||!w.Agama)&&!confirm('Tempat lahir/agama warga ini belum diisi di Data Warga. Tetap cetak dengan titik-titik?'))return;const no=$('sNo').value.trim();if(!no)return alert('Nomor surat kosong.');
+ D.surat=D.surat||[];if(!D.surat.some(x=>x.no===no)){D.surat.push({no,tgl:$('sTg').value,nama:w.Nama,nik:w.NIK,kep:$('sK').value,tpl:w.TempatLahir||'',tlh:w.TanggalLahir||'',jk:w.Gender||'',ag:w.Agama||'',pk:$('sPk').value,al:$('sAl').value});save()}
+ $('printRoot').innerHTML='<div class="surat">'+suratHTML()+'</div>';doPrint();$('sNo').value=nextNo();rSurat();rRiw()}
+const LOGO_SVG=z=>`<svg width="${z}" height="${z}" viewBox="0 0 100 100"><defs><path id="arc" d="M18 55a32 32 0 0 1 64 0"/></defs><circle cx="50" cy="50" r="47" fill="#c9a227"/><circle cx="50" cy="50" r="41" fill="#12285a" stroke="#fff" stroke-width="2"/><path d="M50 18l24 8v18c0 18-12 28-24 34-12-6-24-16-24-34V26z" fill="#0b1a3d" stroke="#c9a227" stroke-width="2"/><text x="50" y="50" text-anchor="middle" fill="#fff" font-size="15" font-weight="700" font-family="Georgia,serif">RT 10</text><text x="50" y="64" text-anchor="middle" fill="#c9a227" font-size="9" font-weight="700" font-family="Georgia,serif">RW 04</text></svg>`;
+const logoHTML=z=>{const u=(D.cfg||{}).logo;return u?`<img src="${esc(u)}" alt="Logo" style="width:${z}px;height:${z}px;object-fit:contain" onerror="this.outerHTML=LOGO_SVG(${z})">`:LOGO_SVG(z)};
+function applyLogo(){if($('logoSide'))$('logoSide').innerHTML=logoHTML(54);$('logoLogin').innerHTML=logoHTML(64);$('logoPrev').innerHTML=logoHTML(48)}
+function setLogo(){const u=$('logoUrl').value.trim();if(u&&!/^(https?:\/\/|data:image\/)/i.test(u))return alert('URL logo harus diawali http:// atau https://');D.cfg=D.cfg||{};D.cfg.logo=u;save();applyLogo()}
+const doPrint=()=>setTimeout(()=>print(),350);
+function cleanTbl(id){const t=$(id).cloneNode(true);t.removeAttribute('id');t.removeAttribute('class');t.querySelectorAll('.no-x').forEach(e=>e.remove());t.querySelectorAll('[onclick]').forEach(e=>e.removeAttribute('onclick'));return t}
+const docTitle=(id,name)=>id==='tblV'?VC[vc][0].toUpperCase():({tblW:'DAFTAR WARGA AKTIF',tblI:'MATRIKS IURAN WARGA TAHUN '+$('iY').value,tblKas:'BUKU KAS PEMASUKAN IURAN TAHUN '+$('iY').value,tblA:'ARSIP MUTASI WARGA'}[id]||name);
+function xls(id,name){const t=cleanTbl(id),title=docTitle(id,name),ths=[...t.querySelectorAll('thead th')],n=ths.length;
+ const rows=[...t.querySelectorAll('tbody tr')];rows.forEach((r,i)=>{if(i%2)r.className='z'});
+ const wd=ths.map((_,c)=>Math.min(60,Math.max(8,...[...t.rows].map(r=>(r.cells[c]?r.cells[c].textContent.length:0)))+2)*7);
+ const kr=(x,st)=>`<tr><td colspan="${n}" style="border:none;text-align:center;${st}">${x}</td></tr>`;
+ const a=Math.ceil(n/2),b=n-a,sg=(l,r,h)=>`<tr style="height:${h||20}px"><td colspan="${a}" style="border:none;text-align:center;font-weight:bold">${l}</td><td colspan="${b}" style="border:none;text-align:center;font-weight:bold">${r}</td></tr>`;
+ const css='<style>table{border-collapse:collapse;font-family:Calibri,Arial;font-size:11pt}td,th{border:1px solid #1b3a7a;padding:4px 6px;mso-number-format:"\\@";vertical-align:middle;white-space:nowrap}th{background:#12285a;color:#ffffff;font-weight:bold;text-align:center}tr.z td{background:#eef3fb}td.lunas{background:#059669;color:#ffffff;text-align:center}td.belum{text-align:center;color:#94a3b8}</style>';
+ const h='<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8">'+css+'</head><body><table><colgroup>'+wd.map(w=>`<col style="width:${w}px">`).join('')+'</colgroup>'
+  +kr('RUKUN TETANGGA 010 / 04','font-size:14pt;font-weight:bold;color:#12285a')+kr('KELURAHAN SUKABUMI SELATAN KECAMATAN KEBON JERUK','font-weight:bold;color:#12285a')+kr('KOTA ADMINISTRASI JAKARTA BARAT','font-weight:bold;color:#12285a')
+  +kr('Sekretariat : Gg. H. Raidi Kp. Baru RT 010 / 04 No. Hp : 0882 1971 8063 · Kode Pos 11560','font-size:9pt;border-bottom:3px double #12285a')+kr('&nbsp;','')
+  +kr(esc(title),'font-size:13pt;font-weight:bold')+kr('Dicetak: '+fd(new Date().toISOString())+' · Jumlah data: '+rows.length,'font-size:9pt')+kr('&nbsp;','')
+  +t.innerHTML+kr('&nbsp;','')+sg('','Jakarta, '+fd(new Date().toISOString()))+sg('Sekretaris','Ketua RT 010 / 04')+sg('','',60)+sg('( ................................ )','<u>H. HAPIZ</u>')+'</table></body></html>';
+ const el=document.createElement('a');el.href=URL.createObjectURL(new Blob(['\ufeff'+h],{type:'application/vnd.ms-excel'}));el.download=name+'.xls';el.click()}
+function pdfTbl(id,title){const t=cleanTbl(id);t.className='pt';const n=t.querySelectorAll('thead th').length,nr=t.querySelectorAll('tbody tr').length,d=fd(new Date().toISOString());
+ $('printRoot').innerHTML=`<style>@page{size:A4 ${n>=8?'landscape':'portrait'};margin:12mm}</style><div class="pdoc" style="font-family:Arial,sans-serif;color:#000">
+ <div style="display:flex;align-items:center;gap:14px;border-bottom:4px double #12285a;padding-bottom:8px;margin-bottom:10px">${logoHTML(70)}<div class="kop" style="flex:1;font-family:Arial,sans-serif;font-size:12.5pt;color:#12285a">RUKUN TETANGGA 010 / 04<br>KELURAHAN SUKABUMI SELATAN KECAMATAN KEBON JERUK<br>KOTA ADMINISTRASI JAKARTA BARAT<div style="font-weight:normal;font-size:9pt;color:#000">Sekretariat : Gg. H. Raidi Kp. Baru RT 010 / 04 No. Hp : 0882 1971 8063 · Kode Pos 11560</div></div><div style="width:70px"></div></div>
+ <div style="text-align:center;font-weight:bold;font-size:13pt;color:#12285a;margin-top:6px">${title}</div><div style="text-align:center;font-size:9pt;margin-bottom:8px">Dicetak: ${d} · Jumlah data: ${nr}</div>${t.outerHTML}
+ <div style="display:flex;justify-content:space-between;margin-top:26px;font-size:10pt;page-break-inside:avoid"><div style="text-align:center;width:40%"><br><b>Sekretaris</b><div style="height:70px"></div>( ................................ )</div><div style="text-align:center;width:40%">Jakarta, ${d}<br><b>Ketua RT 010 / 04</b><div style="height:70px"></div><b><u>H. HAPIZ</u></b></div></div></div>`;doPrint()}
+/* Iuran */
+function rIuran(){if(!$('iY').value)$('iY').value=new Date().getFullYear();const y=$('iY').value,nom=+$('iN').value||0;D.iuran[y]=D.iuran[y]||{};
+ const kk={};akt().forEach(w=>{if(!kk[w.NoKK]||w.HubKeluarga==='Kepala Keluarga')kk[w.NoKK]=w});const L=Object.values(kk);let tot=0;
+ $('tblI').innerHTML='<thead><tr><th>Kepala KK<th>No KK'+BLN.map(b=>'<th>'+b).join('')+'</tr></thead><tbody>'+L.map(w=>{const m=D.iuran[y][w.NoKK]||[];tot+=m.length*nom;
+  return`<tr><td>${esc(w.Nama)}<td>${esc(w.NoKK)}`+BLN.map((b,i)=>`<td class="${m.includes(i)?'lunas':'belum'}" ${can('iuran')?`onclick="payTgl('${y}','${w.NoKK}',${i})"`:''}>${m.includes(i)?'✓':'·'}`).join('')+'</tr>'}).join('')+'</tbody>';
+ rKas()}
+let kEd=null;
+function rKas(){D.kas=D.kas||[];const y=String($('iY').value),cv=$('kW').value;
+ const L=D.kas.map((k,i)=>[k,i]).filter(([k])=>String(k.tgl).slice(0,4)===y).sort((a,b)=>String(b[0].tgl).localeCompare(String(a[0].tgl)));
+ const sum=L.reduce((t,[k])=>t+(+k.nominal||0),0),ed=can('iuran');
+ $('iTot').innerHTML=`Total pemasukan iuran ${y}: <b style="display:inline;font-size:1.2rem;color:#059669">Rp ${sum.toLocaleString('id-ID')}</b> · ${L.length} transaksi`;
+ $('kW').innerHTML='<option value="">— pilih warga —</option>'+akt().map(w=>`<option value="${w.ID}">${esc(w.Nama)} (KK ${esc(String(w.NoKK).slice(-6))})</option>`).join('');$('kW').value=cv;
+ if(!$('kNm').value)$('kNm').value=$('iN').value;if(!$('kTg').value)$('kTg').value=new Date().toISOString().slice(0,10);
+ $('tblKas').innerHTML='<thead><tr><th>No<th>Tanggal<th>Nama Warga<th>Keterangan<th>Bulan<th>Nominal (Rp)'+(ed?'<th class="no-x">Aksi':'')+'</tr></thead><tbody>'+(L.length?L.map(([k,i],n)=>`<tr><td>${n+1}<td>${fd(k.tgl)}<td class="font-medium">${esc(k.nama)}<td>${esc(k.ket)}<td>${k.bulan!==''&&k.bulan!=null?BLN[+k.bulan]:'-'}<td style="text-align:right">${(+k.nominal||0).toLocaleString('id-ID')}`+(ed?`<td class="no-x whitespace-nowrap"><button class="btn s" onclick="editKas(${i})">Ubah</button> <button class="btn r" onclick="delKas(${i})">Hapus</button>`:'')+'</tr>').join(''):'<tr><td colspan="7" class="text-center text-slate-400 py-5">Belum ada transaksi di tahun ini.</tr>')+`</tbody><tfoot><tr><td colspan="5" style="text-align:right;font-weight:bold">TOTAL<td style="text-align:right;font-weight:bold">${sum.toLocaleString('id-ID')}`+(ed?'<td class="no-x">':'')+'</tr></tfoot>'}
+function rmKas(i){const k=D.kas[i];D.kas.splice(i,1);if(k.bulan!==''&&k.bulan!=null){const y=String(k.tgl).slice(0,4);
+ if(!D.kas.some(x=>x.kk===k.kk&&String(x.bulan)===String(k.bulan)&&String(x.tgl).slice(0,4)===y)){const a=(D.iuran[y]||{})[k.kk];if(a){const j=a.indexOf(+k.bulan);if(j>=0)a.splice(j,1)}}}}
+function saveKas(){if(!can('iuran'))return;const w=D.warga.find(x=>x.ID===$('kW').value),nom=+$('kNm').value,tgl=$('kTg').value;
+ if(!w)return alert('Pilih nama warga.');if(!tgl)return alert('Isi tanggal iuran.');if(!(nom>0))return alert('Isi nominal iuran.');
+ if(kEd!==null){rmKas(kEd);kEd=null}
+ const bl=$('kBl').value,y=tgl.slice(0,4);D.kas.push({id:uid(),tgl,wid:w.ID,nama:w.Nama,kk:w.NoKK,ket:$('kKt').value.trim(),nominal:nom,bulan:bl});
+ if(bl!==''){D.iuran[y]=D.iuran[y]||{};const a=D.iuran[y][w.NoKK]=D.iuran[y][w.NoKK]||[];if(!a.includes(+bl))a.push(+bl)}
+ save();resetKas();rIuran()}
+function resetKas(){kEd=null;$('kW').value='';$('kBl').value='';$('kKt').value='Iuran bulanan';$('kNm').value=$('iN').value;$('kBtn').textContent='Simpan iuran'}
+function editKas(i){const k=D.kas[i];kEd=i;$('kTg').value=k.tgl;$('kW').value=k.wid;$('kKt').value=k.ket;$('kNm').value=k.nominal;$('kBl').value=k.bulan==null?'':k.bulan;$('kBtn').textContent='Simpan perubahan';scrollTo(0,0)}
+function delKas(i){if(!confirm('Hapus transaksi iuran ini?'))return;rmKas(i);save();rIuran()}
+function payTgl(y,kk,i){const a=D.iuran[y][kk]=D.iuran[y][kk]||[],p=a.indexOf(i);p<0?a.push(i):a.splice(p,1);save();rIuran();autoPush()}
+/* Kegiatan */
+function addKeg(){if(!$('kN').value||!$('kT').value)return alert('Isi nama dan tanggal.');D.keg.push({id:uid(),nama:$('kN').value,tgl:$('kT').value,hadir:[]});$('kN').value='';save();rKeg()}
+function rKeg(){$('tblK').innerHTML='<thead><tr><th>Tanggal<th>Kegiatan<th>Hadir<th class="no-x">Aksi</tr></thead><tbody>'+(D.keg.length?[...D.keg].sort((a,b)=>b.tgl.localeCompare(a.tgl)).map(k=>`<tr><td>${fd(k.tgl)}<td>${esc(k.nama)}<td>${k.hadir.length} orang<td class="no-x"><button class="btn" onclick="absen('${k.id}')">Absensi</button> ${can('kegiatan')?`<button class="btn r" onclick="delKeg('${k.id}')">Hapus</button>`:''}</tr>`).join(''):'<tr><td colspan="4" class="text-center text-slate-400 py-6">Belum ada agenda.</tr>')+'</tbody>'}
+function delKeg(id){if(confirm('Hapus agenda?')){D.keg=D.keg.filter(k=>k.id!==id);save();rKeg()}}
+function absen(id){const k=D.keg.find(x=>x.id===id);$('aT').textContent='Absensi: '+k.nama;
+ $('aL').innerHTML=akt().filter(w=>age(w.TanggalLahir)>=17).map(w=>`<label class="flex gap-2 items-center"><input type="checkbox" ${can('kegiatan')?'':'disabled'} ${k.hadir.includes(w.ID)?'checked':''} onchange="hd('${id}','${w.ID}',this.checked)">${esc(w.Nama)}</label>`).join('')||'Belum ada warga.';$('mA').classList.add('on')}
+function hd(k,w,c){const a=D.keg.find(x=>x.id===k);a.hadir=a.hadir.filter(x=>x!==w);if(c)a.hadir.push(w);save();rKeg()}
+/* Backup & Google Sheets */
+function backup(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D,null,1)],{type:'application/json'}));a.download='backup-warga-rt10.json';a.click()}
+function restore(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!Array.isArray(j.warga))throw 0;D={warga:j.warga,iuran:j.iuran||{},keg:j.keg||[],surat:j.surat||[],kas:j.kas||[],cfg:j.cfg||{}};save();alert('Restore berhasil.');nav('dash')}catch(x){alert('File JSON tidak valid.')}};r.readAsText(f)}
+const inGAS=()=>!!(window.google&&google.script&&google.script.run);
+const hasGS=()=>inGAS()||(gsUrl&&gsUrl!==GAS_URL);
+const ROLEN={admin:'Admin',input:'Petugas Input Data',petugas:'Petugas RT',bendahara:'Bendahara',viewer:'Pengurus'};
+const ROLEP={admin:['warga','mutasi','hapus','iuran','kegiatan','surat','editsurat'],input:['warga'],petugas:['warga','mutasi','kegiatan','surat','editsurat','iuran'],bendahara:['iuran'],viewer:[]};
+let ME=null,TOKEN='',USERS=[];
+const can=k=>!!ME&&ROLEP[ME.role].includes(k);
+const okMenu=m=>ME&&(ME.role==='admin'||(!['set','users'].includes(m)&&(m!=='surat'||can('surat'))));
+async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('rt10rw04|'+t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function doLogin(){const u=$('lu').value.trim().toLowerCase(),p=$('lp').value;if(!u||!p)return;$('le').textContent='';
+ try{if(!hasGS()){if(u==='admin'&&p==='admin123')ME={username:'admin',nama:'Admin (mode lokal)',role:'admin'};else throw new Error('Mode lokal: gunakan admin / admin123')}
+  else{const r=await call({a:'login',u,h:await sha(p)});if(r.err)throw new Error(r.err);ME=r.user;TOKEN=r.token}
+  $('login').classList.remove('on');$('lp').value='';$('me').textContent=ME.nama+' · '+ROLEN[ME.role];cur='dash';await pull(true);nav('dash')}catch(e){$('le').textContent=e.message||'Gagal terhubung ke server'}}
+function logout(){ME=null;TOKEN='';if(hasGS()){D={warga:[],iuran:{},keg:[]};try{localStorage.removeItem(KEY)}catch(e){}}$('login').classList.add('on')}
+function saveUrl(){gsUrl=$('url').value.trim()||GAS_URL;try{localStorage.setItem(URLK,gsUrl)}catch(e){}stat();alert('URL disimpan. Silakan login ulang ke server.');logout()}
+function stat(t){$('sync').textContent=t||(hasGS()?'Terhubung ke Google Sheets':'Mode lokal (belum terhubung)')}
+function call(req){req.token=TOKEN;return new Promise((ok,no)=>{const j=JSON.stringify(req);
+ if(inGAS())google.script.run.withSuccessHandler(x=>ok(JSON.parse(x))).withFailureHandler(no).api(j);
+ else if(hasGS())fetch(gsUrl,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:j}).then(r=>r.json()).then(ok,no);
+ else no(new Error('URL Apps Script belum diisi'))})}
+function authFail(){alert('Sesi habis, silakan login ulang.');logout()}
+async function pull(q){if(!hasGS()||!TOKEN){if(!q)alert('Belum terhubung ke Google Sheets.');return}
+ stat('Memuat dari Sheets…');try{const r=await call({a:'load'});if(r.err){if(r.err==='auth')return authFail();throw new Error(r.err)}D={warga:r.warga||[],iuran:r.iuran||{},keg:r.keg||[],surat:r.surat||[],kas:r.kas||[],cfg:r.cfg||{}};saveLocal();applyLogo();stat();if(ME&&!q)nav(cur);if(!q)alert('Data dimuat: '+D.warga.length+' warga.')}catch(e){stat('Gagal memuat Sheets');if(!q)alert('Gagal: '+e.message)}}
+async function push(m){if(!hasGS()||!TOKEN||!ME||ME.role==='viewer'){if(m)alert('Tidak bisa mengirim (belum login/terhubung/akses lihat-saja).');return}
+ stat('Menyimpan ke Sheets…');try{const r=await call({a:'save',data:D});if(r.err){if(r.err==='auth')return authFail();throw new Error(r.err)}stat('Tersimpan ✓ '+new Date().toLocaleTimeString('id-ID'));if(m)alert('Data terkirim ke Google Sheets.')}catch(e){stat('Gagal menyimpan');if(m)alert('Gagal: '+e.message)}}
+let tm;function autoPush(){clearTimeout(tm);tm=setTimeout(()=>push(),800)}
+async function rUsers(){if(!TOKEN){$('tblU').innerHTML='<tr><td class="p-4 text-sm">Manajemen user memerlukan koneksi Google Sheets.</tr>';return}
+ try{const r=await call({a:'users'});if(r.err)throw new Error(r.err);USERS=r.users}catch(e){return alert(e.message)}
+ $('tblU').innerHTML='<thead><tr><th>Username<th>Nama<th>Role<th>Status<th>Aksi</tr></thead><tbody>'+USERS.map(u=>`<tr><td>${esc(u.username)}<td>${esc(u.nama)}<td>${ROLEN[u.role]}<td>${u.aktif?'<b class="text-em">Aktif</b>':'<span class="text-slate-400">Nonaktif</span>'}<td><button class="btn s" onclick="editUser('${u.username}')">Ubah</button> ${u.username===ME.username?'':`<button class="btn r" onclick="delUser('${u.username}')">Hapus</button>`}</tr>`).join('')+'</tbody>'}
+function editUser(n){const u=USERS.find(x=>x.username===n);$('uU').value=u.username;$('uU').readOnly=true;$('uN').value=u.nama;$('uR').value=u.role;$('uA').checked=u.aktif;$('uP').value='';scrollTo(0,0)}
+async function saveUser(){const un=$('uU').value.trim().toLowerCase(),pw=$('uP').value;if(pw&&pw.length<6)return alert('Password minimal 6 karakter.');
+ const u={username:un,nama:$('uN').value.trim(),role:$('uR').value,aktif:$('uA').checked};if(pw)u.hash=await sha(pw);
+ try{const r=await call({a:'userSave',u});if(r.err)throw new Error(r.err);['uU','uN','uP'].forEach(i=>$(i).value='');$('uU').readOnly=false;rUsers()}catch(e){alert(e.message)}}
+async function delUser(n){if(!confirm('Hapus user '+n+'?'))return;try{const r=await call({a:'userDel',username:n});if(r.err)throw new Error(r.err);rUsers()}catch(e){alert(e.message)}}
+function seed(q){const p=(n,nik,kk,g,t,h,c,ak)=>({ID:uid(),Nama:n,NIK:nik,NoKK:kk,Gender:g,TanggalLahir:t,NoHP:'',HubKeluarga:h,StatusTinggal:'Tetap',CheckboxAlamat:c,AlamatKTP:c?RT_ADDR:ak,AlamatDomisili:c?RT_ADDR:'Kos di RT 010 / 04',StatusWarga:'Aktif',TanggalMutasi:'',Keterangan:''});
+ D.warga=[p('Budi Santoso','3171010101800001','3171010101100001','Laki-laki','1980-01-01','Kepala Keluarga',true),p('Siti Aminah','3171010101820002','3171010101100001','Perempuan','1982-03-10','Istri',true),p('Rafi Santoso','3171010101150003','3171010101100001','Laki-laki','2015-05-20','Anak',true),
+ p('Agus Salim','3201010101900004','3171010101100002','Laki-laki','1990-07-17','Kepala Keluarga',false,'Bogor, Jawa Barat'),p('Dewi Lestari','3201010101950005','3171010101100002','Perempuan','1995-11-02','Istri',false,'Bogor, Jawa Barat')];
+ save();if(!q)nav('dash')}
+stat();applyLogo();fillFJ('wB','wJ');fillFJ('vB','vJ');
+</script></body></html>
