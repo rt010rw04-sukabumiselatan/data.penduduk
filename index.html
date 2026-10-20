@@ -176,7 +176,7 @@ const KEY='warga_rt10',URLK='warga_rt10_url';
 const MENU=[['dash','📊','Dashboard'],['warga','👥','Data Warga'],['view','🔎','Lihat KTP & KK'],['surat','✉️','Surat Pengantar'],['iuran','💰','Iuran & Kas'],['kegiatan','📅','Kegiatan & Absensi'],['arsip','🗂️','Arsip Mutasi'],['users','🔐','Manajemen User'],['set','⚙️','Pengaturan Admin']];
 const BLN=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
 const RT_ADDR='RT 010 / RW 04, Kel. Sukabumi Selatan, Kec. Kebon Jeruk, Jakarta Barat';
-const GAS_URL='YOUR_GOOGLE_APPS_SCRIPT_URL';
+const GAS_URL='https://script.google.com/macros/s/AKfycbwDkt5CQac4jEXYqREI_ehPNYKiQNcE-k77XqvtZguLNlBtGFEXCjy4thIZ4MqogCe8/exec';
 let D={warga:[],iuran:{},keg:[]},cur='dash',editId=null,mutId=null,gsUrl='';
 try{D=JSON.parse(localStorage.getItem(KEY))||D;gsUrl=localStorage.getItem(URLK)||''}catch(e){}
 gsUrl=gsUrl||GAS_URL;
